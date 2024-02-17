@@ -1,0 +1,3 @@
+timeline:
+  number: "Número {num}"
+  articles: "{num} articles"
