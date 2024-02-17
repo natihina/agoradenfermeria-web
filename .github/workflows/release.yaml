@@ -48,7 +48,6 @@ jobs:
           local-dir: ./
           server-dir: /public_html/api/
           protocol: ftps
-          dry-run: true
 
   
 
