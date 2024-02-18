@@ -12,25 +12,29 @@ export const useMagazineStore = defineStore('magazine', () => {
     magazines.value = await fetcher.get(`magazines`).then((response: any) => {
       let magazines = [] as Magazine[]
       for (let i = 0; i < response.data.length; i++) {
+        const apiMagazine = response.data[i]
         const m = {
-          id: parseInt(response.data[i].id),
-          number: parseInt(response.data[i].number),
-          vol_major: parseInt(response.data[i].vol_major),
-          vol_minor: parseInt(response.data[i].vol_minor),
-          creation_date: new Date(Date.parse(response.data[i].creation_date)),
-          modified_date: new Date(Date.parse(response.data[i].modified_date)),
-          type: parseInt(response.data[i].type),
-          status: parseInt(response.data[i].status),
+          id: parseInt(apiMagazine.id),
+          number: parseInt(apiMagazine.number),
+          vol_major: parseInt(apiMagazine.vol_major),
+          vol_minor: parseInt(apiMagazine.vol_minor),
+          creation_date: new Date(Date.parse(apiMagazine.creation_date)),
+          modified_date: new Date(Date.parse(apiMagazine.modified_date)),
+          type: parseInt(apiMagazine.type),
+          status: parseInt(apiMagazine.status),
 
-          cover: response.data[i].file_path ? {
-            file_path: response.data[i].file_path,
+          cover: apiMagazine.file_path ? {
+            file_path: apiMagazine.file_path,
           } : undefined,
-          details: response.data[i].label ? {
-            label: response.data[i].label,
-            publish_date: new Date(Date.parse(response.data[i].publish_date)),
+          details: apiMagazine.label ? {
+            label: apiMagazine.label,
+            publish_date: new Date(Date.parse(apiMagazine.publish_date)),
           } : undefined,
 
-          articles_count: parseInt(response.data[i].articles_count),
+          magazine_entrypoint: (apiMagazine.lang === 'ca' ? 'CAT' : 'CAST') + '/' + apiMagazine.ruta + '/' + apiMagazine.revista,
+          magazine_format: apiMagazine.formato === 'pdf' ? 'pdf' : 'html',
+
+          articles_count: parseInt(apiMagazine.articles_count),
         } as Magazine
 
         magazines.push(m)
@@ -42,5 +46,13 @@ export const useMagazineStore = defineStore('magazine', () => {
     return magazines
   }
 
-  return {loadMagazines, magazines}
+  async function getMagazine(id: number) {
+    if (magazines.value.length === 0) {
+      await loadMagazines()
+    }
+
+    return magazines.value.find((m) => m.id === id)
+  }
+
+  return {loadMagazines, getMagazine, magazines}
 }, {persist: true})

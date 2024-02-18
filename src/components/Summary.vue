@@ -61,6 +61,7 @@ const sections = computed(() => {
                 color="primary"
                 size="small"
                 variant="elevated"
+                :to="{name: '/magazine/[id]', params: {id: summary.id.toString()}, query: {page: summary.label?.page || undefined}}"
               >
                 {{ $t('summary.article_btn') }}
               </v-btn>

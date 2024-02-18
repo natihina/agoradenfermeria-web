@@ -1,3 +1,7 @@
 timeline:
   number: "Número {num}"
   articles: "{num} articles"
+  view: "Ver revista"
+  summary: "Ver sumario"
+  summary_title: "Sumario"
+  close: "Cerrar"

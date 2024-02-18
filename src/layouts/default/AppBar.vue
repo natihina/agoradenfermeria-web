@@ -1,10 +1,7 @@
 <template>
   <v-app-bar color="primary" density="prominent">
     <template v-slot:prepend>
-      <v-img
-        :src="logoUrl"
-        :width="200"
-      />
+      <v-img :src="logoUrl" :width="200"/>
     </template>
 
     <v-container class="ma-2">
@@ -23,9 +20,9 @@
 
       <v-row>
         <v-tabs :model-value="tabPage" color="black" grow height="46">
-          <v-tab value="/" @click="$router.push('/')">{{ $t('header.revista') }}</v-tab>
-          <v-tab value="/recursos" @click="$router.push('/recursos')">{{ $t('header.recursos') }}</v-tab>
-          <v-tab value="/contact" @click="$router.push('/contact')">{{ $t('header.contacto') }}</v-tab>
+          <v-tab to="/" value="/">{{ $t('header.revista') }}</v-tab>
+          <v-tab to="/resources" value="/resources">{{ $t('header.recursos') }}</v-tab>
+          <v-tab to="/contact" value="/contact">{{ $t('header.contacto') }}</v-tab>
         </v-tabs>
       </v-row>
     </v-container>

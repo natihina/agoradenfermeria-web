@@ -11,7 +11,15 @@ interface Magazine {
   cover: Image | undefined;
   details: MagazineDetails | undefined;
 
+  magazine_entrypoint: string;
+  magazine_format: MagazineFormat;
+
   articles_count: number;
+}
+
+enum MagazineFormat {
+  pdf = 'pdf',
+  html = 'html',
 }
 
 interface MagazineCover {

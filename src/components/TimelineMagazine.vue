@@ -12,7 +12,7 @@ const loadingSummary = ref(false)
 const summaries = ref<Summary[]>([])
 const loadSummary = async () => {
   loadingSummary.value = true
-  summaries.value = await summaryStore.loadSummary(props.magazine.id.toString())
+  summaries.value = await summaryStore.loadSummary(props.magazine.number.toString())
   dialog.value = true
   loadingSummary.value = false
 }
@@ -88,8 +88,9 @@ const image = computed(() => {
               prepend-icon="mdi-eye"
               size="small"
               variant="tonal"
+              :to="{name: '/magazine/[id]', params: {id: props.magazine.id.toString()}}"
             >
-              Ver Revista
+              {{ $t('timeline.view') }}
             </v-btn>
 
             <v-dialog
@@ -104,13 +105,13 @@ const image = computed(() => {
                   variant="outlined"
                   @click="loadSummary()"
                 >
-                  Ver Sumario
+                  {{ $t('timeline.summary') }}
                 </v-btn>
               </template>
               <v-card>
                 <v-card-title>
                   <span class="text-h5">
-                    Sumario
+                    {{ $t('timeline.summary_title') }}
                   </span>
                 </v-card-title>
                 <v-card-text>
@@ -123,7 +124,7 @@ const image = computed(() => {
                     variant="text"
                     @click="dialog = false"
                   >
-                    Tancar
+                    {{ $t('timeline.close') }}
                   </v-btn>
                 </v-card-actions>
               </v-card>

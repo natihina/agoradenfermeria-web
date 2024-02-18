@@ -1,5 +1,8 @@
 # Ágora de Enfermería | Àgora d'Infermeria
 
+[<img alt="Deployed with FTP Deploy Action" src="https://img.shields.io/badge/Deployed With-FTP DEPLOY ACTION-%3CCOLOR%3E?style=for-the-badge&color=0077b6">](https://github.com/SamKirkland/FTP-Deploy-Action)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/davfer/agoradenfermeria-web/release)
+
 Frontal estático de la página web Ágora de Enfermería.
 
 ## Acerca de

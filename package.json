@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@mdi/font": "7.0.96",
+    "@tato30/vue-pdf": "^1.9.4",
     "@unhead/vue": "^1.8.10",
     "axios": "^1.6.7",
     "core-js": "^3.34.0",

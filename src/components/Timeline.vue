@@ -4,7 +4,12 @@ import TimelineMagazine from "@/components/TimelineMagazine.vue";
 
 const props = defineProps<{ magazines: Magazine[] }>()
 
-const items = computed(() => {
+interface Item {
+  type: string
+  magazine: Magazine
+}
+
+const items = computed((): Item[] => {
   let its = []
 
   for (let i = 0; i < props.magazines.length; i++) {
@@ -17,10 +22,15 @@ const items = computed(() => {
   return its
 })
 
-const getComponent = (type: string) => {
-  switch (type) {
+const getComponent = (item: Item) => {
+  switch (item.type) {
     case 'magazine':
-      return TimelineMagazine
+      return {
+        comp: TimelineMagazine,
+        props: {
+          magazine: item.magazine
+        }
+      }
     default:
       return null
   }
@@ -30,7 +40,7 @@ const getComponent = (type: string) => {
 
 <template>
   <v-timeline>
-    <TimelineMagazine v-for="(item, i) in items" :key="i" :magazine="item.magazine"/>
+    <component :is="getComponent(item)?.comp" v-for="(item, i) in items" :key="i" v-bind="getComponent(item)?.props"/>
   </v-timeline>
 </template>
 
